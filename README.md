@@ -1,3 +1,3 @@
-#Pern Application
-##Client Side code in master branch
-##Server Side coode in main branch
+# Pern Application
+## Client Side code in master branch
+## Server Side code in main branch
