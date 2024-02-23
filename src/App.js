@@ -12,7 +12,8 @@ import {
 import Login from "./components/login";
 import Dashboard from "./components/dashboard";
 import Register from "./components/register";
-import {ToastContainer} from "react-toastify";
+import {ToastContainer,toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // toast.configure();
 
@@ -41,6 +42,9 @@ function App() {
     setIsAuthenticated(boolean);
   };
 
+  const notify = message =>{
+    toast.error(message);
+  }
   
   return (
   <Fragment>
@@ -57,11 +61,11 @@ function App() {
         <div className="container">
         <Switch>
         <Route exact path="/details" render ={props=><Pagenation />}></Route>
-          <Route exact path="/dashboard" render={props =>isAuthenticated ? (<Dashboard {...props} setAuth={setAuth} />):(<Redirect to="/" />)}/>
-          <Route exact path="/" render={props =>!isAuthenticated ? (<Login {...props} setAuth={setAuth} />):(<Redirect to="/dashboard" />)}/>
-          <Route exact path="/register" render={props =>!isAuthenticated ? (<Register {...props} setAuth={setAuth}/>):(<Redirect to="/" />)}/>
-          <ToastContainer />
+          <Route exact path="/dashboard" render={props =>isAuthenticated ? (<Dashboard {...props} setAuth={setAuth} notify={notify}/>):(<Redirect to="/" />)}/>
+          <Route exact path="/" render={props =>!isAuthenticated ? (<Login {...props} setAuth={setAuth} notify={notify}/>):(<Redirect to="/dashboard" />)}/>
+          <Route exact path="/register" render={props =>!isAuthenticated ? (<Register {...props} setAuth={setAuth} notify={notify}/>):(<Redirect to="/" />)}/>
         </Switch>
+        <ToastContainer />
         </div>
       </Router>
     </div>
